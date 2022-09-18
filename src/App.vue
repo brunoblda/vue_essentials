@@ -1,27 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"
+  v-on:escolhido="adicionarNumero"
+  v-bind:botoesApertados="numerosHistorico"
+  />
+
+  <HelloNew greeting="New props"/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
+import HelloNew from './components/HelloNew.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    HelloNew
+  },
+  methods:{
+    adicionarNumero(numero: number):void{
+      this.numerosHistorico.push(numero)
+    }
+  },
+  data(){
+    return{
+      numerosHistorico: [] as number[]
+    }
   }
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
